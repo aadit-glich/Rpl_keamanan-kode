@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:rpl_keamanan/config/dependency_injector.dart';
 import 'package:rpl_keamanan/models/post.dart';
 import 'package:rpl_keamanan/services/api_service.dart';
+import 'package:rpl_keamanan/utils/logger.dart';
 import 'package:rpl_keamanan/utils/validators.dart';
 
 void main() {
@@ -45,6 +46,16 @@ void main() {
     expect(Validators.validatePassword('Password!!!!'), isNotNull); // no number
     expect(Validators.validatePassword('Password1234'), isNotNull); // no symbol
     expect(Validators.validatePassword(''), isNotNull);
+  });
+
+  test('Structured Logger test', () {
+    expect(() => Logger.debug('Debug message', 'TestTag'), returnsNormally);
+    expect(() => Logger.info('Info message', 'TestTag'), returnsNormally);
+    expect(() => Logger.warning('Warning message', 'TestTag'), returnsNormally);
+    expect(
+      () => Logger.error('Error message', Exception('Test error'), null, 'TestTag'),
+      returnsNormally,
+    );
   });
 
   test('Post model fromJson test', () {

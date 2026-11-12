@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../config/app_config.dart';
 import '../models/post.dart';
 import '../models/user.dart';
+import '../utils/logger.dart';
 
 /// Service untuk komunikasi HTTP dengan REST API.
 ///
@@ -141,12 +142,12 @@ class ApiService {
 
   /// Logging request yang aman (tidak mencetak token/API key).
   void _logRequest(String method, String endpoint) {
-    print('[$method] $endpoint');
+    Logger.info('[$method] $endpoint', 'ApiService');
   }
 
   /// Logging response yang aman (hanya status code).
   void _logResponse(int statusCode) {
-    print('Response status: $statusCode');
+    Logger.info('Response status: $statusCode', 'ApiService');
   }
 
   /// Menutup client.

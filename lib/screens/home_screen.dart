@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../config/app_config.dart';
 import '../config/dependency_injector.dart';
 import '../services/secure_storage_service.dart';
+import '../utils/logger.dart';
 import '../utils/validators.dart';
 import 'post_list_screen.dart';
 import 'user_list_screen.dart';
@@ -374,6 +375,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           label: const Text('Uji Validasi Form'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.indigo,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Logger.debug('Pemeriksaan status lokal aplikasi', 'DemoLogger');
+                            Logger.info('Pengguna memicu pengujian structured logging', 'DemoLogger');
+                            Logger.warning('Simulasi peringatan kapasitas cache mendekati ambang batas', 'DemoLogger');
+                            Logger.error(
+                              'Simulasi kegagalan koneksi ke server eksternal',
+                              Exception('Network unreachable (simulated)'),
+                              null,
+                              'DemoLogger',
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Log 4 level (debug, info, warning, error) tercetak di Debug Console!'),
+                                backgroundColor: Colors.brown,
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.terminal),
+                          label: const Text('Uji Logging Terstruktur'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.brown,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
