@@ -9,12 +9,14 @@ class AppConfig {
   /// Base URL untuk API.
   ///
   /// Diambil dari environment variable `BASE_URL`.
-  static String get baseUrl => dotenv.env['BASE_URL'] ?? '';
+  static String get baseUrl =>
+      dotenv.isInitialized ? (dotenv.env['BASE_URL'] ?? '') : '';
 
   /// API key untuk autentikasi.
   ///
   /// Diambil dari environment variable `API_KEY`.
-  static String get apiKey => dotenv.env['API_KEY'] ?? '';
+  static String get apiKey =>
+      dotenv.isInitialized ? (dotenv.env['API_KEY'] ?? '') : '';
 
   /// Timeout untuk request HTTP (dalam detik).
   static const int timeoutSeconds = 10;

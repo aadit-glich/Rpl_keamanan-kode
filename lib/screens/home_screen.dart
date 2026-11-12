@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../config/app_config.dart';
+import '../config/dependency_injector.dart';
 import '../services/secure_storage_service.dart';
 import '../utils/validators.dart';
 import 'post_list_screen.dart';
@@ -313,10 +314,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: double.infinity,
                         child: ElevatedButton.icon(
                           onPressed: () {
+                            final injector = DependencyInjector.maybeOf(context);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const UserListScreen(),
+                                builder: (context) => UserListScreen(
+                                  repository: injector?.userRepository,
+                                ),
                               ),
                             );
                           },
@@ -334,10 +338,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: double.infinity,
                         child: ElevatedButton.icon(
                           onPressed: () {
+                            final injector = DependencyInjector.maybeOf(context);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const PostListScreen(),
+                                builder: (context) => PostListScreen(
+                                  repository: injector?.postRepository,
+                                ),
                               ),
                             );
                           },

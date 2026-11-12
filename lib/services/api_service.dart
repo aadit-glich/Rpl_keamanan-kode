@@ -11,12 +11,27 @@ import '../models/user.dart';
 /// Class ini menangani semua request HTTP ke API, termasuk
 /// penanganan error dan timeout.
 class ApiService {
+  static ApiService? _instance;
+
   final http.Client _client;
   final String _baseUrl;
 
-  ApiService({http.Client? client, String? baseUrl})
+  factory ApiService({http.Client? client, String? baseUrl}) {
+    if (client != null || baseUrl != null) {
+      return ApiService._internal(client: client, baseUrl: baseUrl);
+    }
+    _instance ??= ApiService._internal();
+    return _instance!;
+  }
+
+  ApiService._internal({http.Client? client, String? baseUrl})
       : _client = client ?? http.Client(),
         _baseUrl = baseUrl ?? AppConfig.baseUrl;
+
+  static ApiService get instance {
+    _instance ??= ApiService._internal();
+    return _instance!;
+  }
 
   /// Mengambil daftar pengguna dari API.
   ///
