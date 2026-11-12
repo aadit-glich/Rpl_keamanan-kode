@@ -20,6 +20,33 @@ void main() {
     expect(Validators.isNotEmpty('   '), isFalse);
   });
 
+  test('Phone validation test', () {
+    expect(Validators.validatePhone('08123456789'), isNull);
+    expect(Validators.validatePhone('0812345678901'), isNull);
+    expect(Validators.validatePhone('081234567'), isNotNull);
+    expect(Validators.validatePhone('0812345678901234'), isNotNull);
+    expect(Validators.validatePhone('0812345678a'), isNotNull);
+    expect(Validators.validatePhone(''), isNotNull);
+  });
+
+  test('URL validation test', () {
+    expect(Validators.validateUrl('http://example.com'), isNull);
+    expect(Validators.validateUrl('https://amikom.ac.id'), isNull);
+    expect(Validators.validateUrl('ftp://example.com'), isNotNull);
+    expect(Validators.validateUrl('amikom.ac.id'), isNotNull);
+    expect(Validators.validateUrl(''), isNotNull);
+  });
+
+  test('Password validation test', () {
+    expect(Validators.validatePassword('Password123!'), isNull);
+    expect(Validators.validatePassword('Secret9#'), isNull);
+    expect(Validators.validatePassword('Pass1!'), isNotNull); // < 8 chars
+    expect(Validators.validatePassword('password123!'), isNotNull); // no uppercase
+    expect(Validators.validatePassword('Password!!!!'), isNotNull); // no number
+    expect(Validators.validatePassword('Password1234'), isNotNull); // no symbol
+    expect(Validators.validatePassword(''), isNotNull);
+  });
+
   test('Post model fromJson test', () {
     final json = {
       'userId': 1,

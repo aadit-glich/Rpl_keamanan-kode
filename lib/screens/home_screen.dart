@@ -5,6 +5,7 @@ import '../services/secure_storage_service.dart';
 import '../utils/validators.dart';
 import 'post_list_screen.dart';
 import 'user_list_screen.dart';
+import 'validation_form_screen.dart';
 
 /// Halaman utama aplikasi RPL & Keamanan.
 class HomeScreen extends StatefulWidget {
@@ -352,6 +353,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           label: const Text('Lihat Daftar Post'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.teal,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ValidationFormScreen(),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.verified_user),
+                          label: const Text('Uji Validasi Form'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.indigo,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
